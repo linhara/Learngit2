@@ -5,7 +5,12 @@ class layer:
         self.weights = np.random.randn(nrOfNeurons, weightsPerNeuron)
 
     def stepForward(self, activations):
-        return self.sigmoid(np.dot(self.weights, activations) + self.biases.T)
+        Z = np.dot(self.weights, activations) + self.biases.T
+        newActivations = self.sigmoid(Z)
+        return newActivations
 
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
+
+    def sigPrime(self, x):
+        return self.sigmoid(x)*(1 - self.sigmoid(x))
