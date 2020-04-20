@@ -41,13 +41,15 @@ def run_network(inp):
 
 def back_prop(i):
     layers[i].error = layers[i].sig_prime() * np.dot(layers[i+1].error, layers[i+1].weights[:, 1:])
-    hopefully_gradient = layers[i].received_activations * layers[i].error       #received????? varför
-    layers[i].weights += -learn_rate * hopefully_gradient
+    hopefully_gradient = layers[i].received_activations[:1] * layers[i].error
+    layers[i].weights += -learn_rate * hopefully_gradient[:, np.newaxis]
+
 
 def cor_output_layer(cost):                                         #denna funktionen borde inte behövas
     layers[-1].error = cost
     hopefully_gradient = layers[-2].activations[1:] * cost
     layers[-1].weights += -learn_rate * hopefully_gradient[:, np.newaxis]
+
 
 def calc_cost_prime(ans, expected):
     return 2*(ans - expected)
