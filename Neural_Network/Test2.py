@@ -1,4 +1,6 @@
 import numpy as np
+import time
+import Test1
 a = np.array([0.5, 1, 10, 100, 1000])
 b = np.array([1, 2, 3, 4])
 m = np.array([[2, 2, 2, 20],
@@ -11,6 +13,7 @@ list1 = [1,2,3]
 list2 = [3,4,5]
 
 def main():
+    start = time.time()
     #print(sigmoid(a))           #numpy smart
     #print(a**2)
     #print(sum(a))
@@ -19,11 +22,15 @@ def main():
     #print(np.hstack(([1], a)))
     #print(1 - a)
     #print(np.dot(m,b))
-    print(np.dot(d,1))
-
-
+    #print(np.dot(d,1))
+    #print(b[:, np.newaxis])
+    #print(m[:, 1:])
+    print(m * b)
 
 def sigmoid(x):
     return 1/(1 + np.exp(-x))
+
+def timewaste():
+    x = 1
 
 main()

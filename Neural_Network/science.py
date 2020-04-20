@@ -46,7 +46,7 @@ for i in range(num_iterations):
     input_layer_outputs = np.hstack((np.ones((inputs.shape[0], 1)), inputs))
     #print(input_layer_outputs)
     hidden_layer_outputs = np.hstack((np.ones((inputs.shape[0], 1)), sigmoid(np.dot(input_layer_outputs, hidden_weights))))
-    #print(hidden_layer_outputs)
+    print(hidden_layer_outputs)
     output_layer_outputs = np.dot(hidden_layer_outputs, output_weights)
 
     # ---------------------backward phase--------------------------------------

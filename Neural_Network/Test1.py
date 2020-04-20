@@ -28,4 +28,8 @@ def main():
     for i in range(150):
         print(np.random.randn())
 
-main()
+def xd():
+    x=1
+
+
+#main()

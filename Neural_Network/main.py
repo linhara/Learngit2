@@ -13,11 +13,13 @@ def main():
     init_struct()
     run_network(inp)               #Ger en lista med activations från varje layer, activationOfEachLayer
     cost = calc_cost_prime(activation_of_each_layer[-1], expected)
-    print(layers)
+    #print(layers)
     # -------------------------back_prop------------
 
-    for i in reversed(range(len(layers)-1)):
-        back_prop(i)
+    cor_output_layer(cost)
+    for index_of_layer in reversed(range(len(layers)-1)):
+        back_prop(index_of_layer)
+
 
     # ----------------------------------------------
 
@@ -38,9 +40,14 @@ def run_network(inp):
 
 
 def back_prop(i):
-    layers[i].error = layers[i].sig_prime() * np.dot(layers[i+1].error, layers[i+1].weights)
-    hopefully_gradient = layers[i].received_activations * layers[i].error
+    layers[i].error = layers[i].sig_prime() * np.dot(layers[i+1].error, layers[i+1].weights[:, 1:])
+    hopefully_gradient = layers[i].received_activations * layers[i].error       #received????? varför
     layers[i].weights += -learn_rate * hopefully_gradient
+
+def cor_output_layer(cost):                                         #denna funktionen borde inte behövas
+    layers[-1].error = cost
+    hopefully_gradient = layers[-2].activations[1:] * cost
+    layers[-1].weights += -learn_rate * hopefully_gradient[:, np.newaxis]
 
 def calc_cost_prime(ans, expected):
     return 2*(ans - expected)
